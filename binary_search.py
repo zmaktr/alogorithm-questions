@@ -13,7 +13,6 @@ def binary_itr(array, target):
       end_index = mid_index - 1
 
   print(mid_index)
-#[2,3,4,56,89,90,233,300,301],89
 
 def binary_recur(array, start_index, end_index, target):
   mid_index = (start_index + end_index) // 2
