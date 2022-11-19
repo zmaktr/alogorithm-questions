@@ -12,6 +12,10 @@ def string_check(string):
   
   return print("this is a palindrome word")
 
-  #[abcbc] => 5
-  #[abbc] => 4
+# quick solution
+# if string == string[::-1]:
+#  return print("this is a palindrome word")
+# else:
+#  return print("this is not a palindrome word")
+  
   
