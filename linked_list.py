@@ -41,9 +41,32 @@ class LinkedList:
       print(node.data)
       node = node.next
 
+  def remove(self, value):
+    currentNode = self.head
+    if currentNode.data == value:
+      self.head = currentNode.next
+      currentNode = None
+      self.count -= 1
+    else:
+      while currentNode.data != value and currentNode is not None:
+        prevNode = currentNode
+        currentNode = currentNode.next
+        if currentNode is None:
+          print("not in list")
+          break
+      if currentNode is not None:
+        prevNode.next = currentNode.next
+        self.count -= 1
+      
+
+
 li = LinkedList()
 li.insert_end(1)
 li.insert_end(2)
 li.insert_end(3)
+li.insert_end(4)
+li.insert_end(5)
+li.insert_end(6)
+li.remove(5)
 li.traverse()
 li.size_of_list()
