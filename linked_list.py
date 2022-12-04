@@ -9,7 +9,7 @@ class LinkedList:
     self.count = 0
   
   def size_of_list(self):
-    return print(self.count )
+    return print(self.count)
   
   # O(1) constant time complexity
   def insert_beginning(self,data):
@@ -41,32 +41,32 @@ class LinkedList:
       print(node.data)
       node = node.next
 
+  # O(n) linear time complexity
   def remove(self, value):
     currentNode = self.head
     if currentNode.data == value:
       self.head = currentNode.next
-      currentNode = None
+      # no need to set "currentNode = None" GARBAGE COLLECTER will do that
       self.count -= 1
     else:
       while currentNode.data != value and currentNode is not None:
         prevNode = currentNode
         currentNode = currentNode.next
+        # check if value in list
         if currentNode is None:
           print("not in list")
           break
+      # change references only if value in list
       if currentNode is not None:
         prevNode.next = currentNode.next
         self.count -= 1
       
 
 
-li = LinkedList()
-li.insert_end(1)
-li.insert_end(2)
-li.insert_end(3)
-li.insert_end(4)
-li.insert_end(5)
-li.insert_end(6)
-li.remove(5)
-li.traverse()
-li.size_of_list()
+#li = LinkedList()
+#li.insert_end(1)
+#li.insert_end(2)
+#li.insert_end(3)
+#li.remove(5)
+#li.traverse()
+#li.size_of_list()
