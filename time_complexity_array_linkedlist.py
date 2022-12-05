@@ -1,3 +1,6 @@
+import time 
+
+# implementation of linked list
 class Node:
   def __init__(self, data):
     self.data = data
@@ -61,13 +64,33 @@ class LinkedList:
         prevNode.next = currentNode.next
         self.count -= 1
       
+### Case - 1 => begining 
+# time complexity for inserting at begining of linkedlist
+li = LinkedList()
+now = time.time()
+for i in range(5):
+  li.insert_beginning(i)
+print(f"Time taken to add 5000 items to beginning of Linked List {time.time()-now}")
 
+# time complexity for inserting at begining of array
+array = []
+now = time.time()
+for i in range(5):
+  #insert(position, value)
+  array.insert(0,i)
+print(f"Time taken to add 5000 items to beginning of array {time.time()-now}")
 
-#li = LinkedList()
-#li.insert_end(1)
-#li.insert_end(2)
-#li.insert_end(3)
-#li.remove(5)
-#li.traverse()
-#li.size_of_list()
+### Case - 2 => end
+# time complexity for inserting at begining of linkedlist
+li = LinkedList()
+now = time.time()
+for i in range(5):
+  li.insert_end(i)
+print(f"Time taken to add 5000 items to end of Linked List {time.time()-now}")
 
+# time complexity for inserting at begining of array
+array = []
+now = time.time()
+for i in range(5):
+  array.append(i)
+print(f"Time taken to add 5000 items to end of array {time.time()-now}")
