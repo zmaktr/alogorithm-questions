@@ -70,7 +70,7 @@ li = LinkedList()
 now = time.time()
 for i in range(5):
   li.insert_beginning(i)
-print(f"Time taken to add 5000 items to beginning of Linked List {time.time()-now}")
+print(f"Time taken to add 500000 items to beginning of Linked List {time.time()-now}")
 
 # time complexity for inserting at begining of array
 array = []
@@ -78,7 +78,7 @@ now = time.time()
 for i in range(5):
   #insert(position, value)
   array.insert(0,i)
-print(f"Time taken to add 5000 items to beginning of array {time.time()-now}")
+print(f"Time taken to add 500000 items to beginning of array {time.time()-now}")
 
 ### Case - 2 => end
 # time complexity for inserting at begining of linkedlist
@@ -86,11 +86,11 @@ li = LinkedList()
 now = time.time()
 for i in range(5):
   li.insert_end(i)
-print(f"Time taken to add 5000 items to end of Linked List {time.time()-now}")
+print(f"Time taken to add 500000 items to end of Linked List {time.time()-now}")
 
 # time complexity for inserting at begining of array
 array = []
 now = time.time()
 for i in range(5):
   array.append(i)
-print(f"Time taken to add 5000 items to end of array {time.time()-now}")
+print(f"Time taken to add 500000 items to end of array {time.time()-now}")

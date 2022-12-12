@@ -60,7 +60,15 @@ class LinkedList:
       if currentNode is not None:
         prevNode.next = currentNode.next
         self.count -= 1
-      
+  def find_middle(self):
+    single_pointer = self.head
+    double_pointer = self.head
+    while double_pointer.next.next is not None:
+      single_pointer = single_pointer.next
+      double_pointer = double_pointer.next.next
+      if double_pointer.next is None:
+        break
+    return print(single_pointer.data)
 
 
 #li = LinkedList()
@@ -71,3 +79,28 @@ class LinkedList:
 #li.traverse()
 #li.size_of_list()
 
+"""
+Question
+Suppose we have a standard linked list. Construct an in-place (without extra memory) algorithm thats able to find the middle node!
+Answer:
+
+using iterations (1) one node at a time (2) two nodes at a time
+when (2) will point to None (1) will point towards middle 
+
+  def find_middle(self):
+    single_pointer = self.head
+    double_pointer = self.head
+    while double_pointer.next.next is not None:
+      single_pointer = single_pointer.next
+      double_pointer = double_pointer.next.next
+      if double_pointer.next is None:
+        break
+    return print(single_pointer.data)
+"""
+
+# li = LinkedList()
+# li.insert_beginning(40)
+# li.insert_beginning(30)
+# li.insert_beginning(20)
+# li.insert_beginning(10)
+# li.find_middle()
