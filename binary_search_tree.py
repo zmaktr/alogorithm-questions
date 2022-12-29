@@ -12,7 +12,7 @@ class BinarySearchTree:
   def __init__(self):
     self.root = None
   
-  #for insertion each time start from root node
+  #for insertion each time start from root node each time
   def insert(self, data):
     if self.root is None:
       self.root = Node(data)
@@ -58,7 +58,37 @@ class BinarySearchTree:
 
     if node.right_node is not None:
       self.inorder_recursion(node.right_node)
-                
+  
+  def remove(self, data):
+    if self.root is not None:
+      self.remove_possibilities(self.root, data)
+
+  def remove_possibilities(self, node, data):
+    
+    #assign the node we want to remove with a variable
+    if data == node.data:
+      removeNode = node
+      #possibility-1 (the node to delete is the leaf node)
+      if removeNode.left_node is None and removeNode.right_node is None:
+        #inform parent node that child has been unlinked/removed
+        if removeNode.data < removeNode.parent.data:
+          removeNode.parent.left_node = None
+          #you dont have to del the node the garbage collector will take care of it
+          #del removeNode
+        elif removeNode.data > removeNode.parent.data:
+          removeNode.parent.right_node = None
+          #del removeNode
+        
+      #possibility-2 (the node to delete has child nodes and sigle level of depth)
+      #possibility-3 (the node to delete has child nodes and mutiple level of depth)
+
+    #traverse and find the position of the node to be deleted
+    if data < node.data:
+      self.remove_possibilities(node.left_node, data)
+    elif data > node.data:
+      self.remove_possibilities(node.right_node, data)
+  
+    
 #"""
 
 """
@@ -131,4 +161,6 @@ i.insert(90)
 i.insert(95) 
 #i.min_node()
 #i.max_node()
+#i.inorder_traverse()
+i.remove(95)
 i.inorder_traverse()
