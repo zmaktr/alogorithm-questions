@@ -85,13 +85,13 @@ class BinarySearchTree:
       elif removeNode.left_node is not None or removeNode.right_node is not None:
         #replace with predecessor
         if removeNode.left_node is not None:
-          predecessorNode = self.predecessorNode(removeNode.left_node)
+          predecessorNode = self.predecessorNode(removeNode)
           removeNode.data = predecessorNode.data
           predecessorNode.parent.right_node = None
           del predecessorNode
         #if no predecessor replace it with sucessor
         elif removeNode.right_node is not None:
-          successorNode = self.successorNode(removeNode.right_node)
+          successorNode = self.successorNode(removeNode)
           removeNode.data = successorNode.data
           successorNode.parent.left_node = None
           del successorNode
@@ -102,6 +102,7 @@ class BinarySearchTree:
       self.remove_possibilities(node.right_node, data)
   
   def predecessorNode(self, node):
+    node = node.left_node
     if node.right_node is not None:
       while node.right_node is not None:
         node = node.right_node
@@ -110,6 +111,7 @@ class BinarySearchTree:
       return node
   
   def successorNode(self, node):
+    node = node.right_node
     if node.left_node is not None:
       while node.left_node is not None:
         node = node.left_node
@@ -181,5 +183,5 @@ i.insert(75)
 #i.min_node()
 #i.max_node()
 #i.inorder_traverse()
-i.remove(55)
+i.remove(5)
 i.inorder_traverse()
