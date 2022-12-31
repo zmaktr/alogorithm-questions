@@ -64,30 +64,59 @@ class BinarySearchTree:
       self.remove_possibilities(self.root, data)
 
   def remove_possibilities(self, node, data):
-    
-    #assign the node we want to remove with a variable
-    if data == node.data:
+    #STEP-2 => after finding the node instance compare it with the input data
+    if node.data == data:
+      #STEP-3 => assign the node we want to remove with a variable
       removeNode = node
+      #STEP-4 => there can be two posibilities to remove the node
       #possibility-1 (the node to delete is the leaf node)
       if removeNode.left_node is None and removeNode.right_node is None:
         #inform parent node that child has been unlinked/removed
-        if removeNode.data < removeNode.parent.data:
+        if removeNode.parent is not None and removeNode.data < removeNode.parent.data:
           removeNode.parent.left_node = None
           #you dont have to del the node the garbage collector will take care of it
-          #del removeNode
-        elif removeNode.data > removeNode.parent.data:
+          del removeNode
+        elif removeNode.parent is not None and removeNode.data > removeNode.parent.data:
           removeNode.parent.right_node = None
-          #del removeNode
-        
-      #possibility-2 (the node to delete has child nodes and sigle level of depth)
-      #possibility-3 (the node to delete has child nodes and mutiple level of depth)
-
-    #traverse and find the position of the node to be deleted
-    if data < node.data:
+          del removeNode
+        elif removeNode.parent is None and removeNode == self.root:
+          self.root = None
+      #possibility-2 (the node to delete has child nodes of any depth)
+      elif removeNode.left_node is not None or removeNode.right_node is not None:
+        #replace with predecessor
+        if removeNode.left_node is not None:
+          predecessorNode = self.predecessorNode(removeNode.left_node)
+          removeNode.data = predecessorNode.data
+          predecessorNode.parent.right_node = None
+          del predecessorNode
+        #if no predecessor replace it with sucessor
+        elif removeNode.right_node is not None:
+          successorNode = self.successorNode(removeNode.right_node)
+          removeNode.data = successorNode.data
+          successorNode.parent.left_node = None
+          del successorNode
+    #STEP-1 => traverse and find the position of the node to be deleted
+    elif data < node.data:
       self.remove_possibilities(node.left_node, data)
     elif data > node.data:
       self.remove_possibilities(node.right_node, data)
   
+  def predecessorNode(self, node):
+    if node.right_node is not None:
+      while node.right_node is not None:
+        node = node.right_node
+      return node
+    else:
+      return node
+  
+  def successorNode(self, node):
+    if node.left_node is not None:
+      while node.left_node is not None:
+        node = node.left_node
+      return node
+    else:
+      return node
+    
     
 #"""
 
@@ -138,29 +167,19 @@ class BinarySearchTree:
 """
           
 
-i = BinarySearchTree()
+i = BinarySearchTree() 
 i.insert(50)
-i.insert(2)
-i.insert(5)
 i.insert(10)
-i.insert(15) 
-i.insert(20) 
-i.insert(25) 
-i.insert(30) 
-i.insert(35) 
-i.insert(40) 
-i.insert(45) 
-i.insert(55) 
-i.insert(60) 
-i.insert(65) 
-i.insert(70) 
-i.insert(75) 
-i.insert(80) 
-i.insert(85) 
-i.insert(90) 
-i.insert(95) 
+i.insert(20)
+i.insert(5)
+i.insert(25)
+i.insert(60)
+i.insert(70)
+i.insert(55)
+i.insert(75)
+
 #i.min_node()
 #i.max_node()
 #i.inorder_traverse()
-i.remove(95)
+i.remove(55)
 i.inorder_traverse()
