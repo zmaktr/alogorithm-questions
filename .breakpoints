@@ -1,3 +1,12 @@
 {
-  "files": {}
+  "files": {
+    "binary_search_tree_questions.py": [
+      {
+        "id": "df6c2968-7d19-4522-b953-896b2cc50ea3",
+        "line": 8,
+        "version": 2446,
+        "index": 364
+      }
+    ]
+  }
 }

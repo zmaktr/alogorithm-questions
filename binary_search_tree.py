@@ -95,7 +95,7 @@ class BinarySearchTree:
           removeNode.data = successorNode.data
           successorNode.parent.left_node = None
           del successorNode
-    #STEP-1 => traverse and find the position of the node to be deleted
+    #STEP-1 => traverse and find the instance of the node to be deleted
     elif data < node.data:
       self.remove_possibilities(node.left_node, data)
     elif data > node.data:
@@ -183,5 +183,5 @@ i.insert(75)
 #i.min_node()
 #i.max_node()
 #i.inorder_traverse()
-i.remove(5)
+i.remove(50)
 i.inorder_traverse()
