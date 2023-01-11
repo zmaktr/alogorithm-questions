@@ -10,3 +10,5 @@ def sort_insertion(array):
       i2 -= 1
     
   return print(array)
+
+sort_insertion([78,86,13,44,95,35,64,69,56,88,34])

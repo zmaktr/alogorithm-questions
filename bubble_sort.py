@@ -10,3 +10,5 @@ def sort_array(array):
     
     max_index -= 1
   return print(array)
+
+sort_array([4,6,3,4,7,9,25,36])

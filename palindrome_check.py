@@ -17,5 +17,6 @@ def string_check(string):
 #  return print("this is a palindrome word")
 # else:
 #  return print("this is not a palindrome word")
-  
+
+string_check('radar')
   

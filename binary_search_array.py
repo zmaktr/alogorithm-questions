@@ -27,3 +27,6 @@ def binary_recur(array, start_index, end_index, target):
       return binary_recur(array, start_index, mid_index - 1, target)
 
   print(mid_index)
+
+binary_itr([2,3,4,56,89,90,233,300,301],89)
+binary_recur([2,3,4,56,89,90,233,300,301,302],0,8,301)
