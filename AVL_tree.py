@@ -73,21 +73,29 @@ class AVLTree:
   T4      T3                     
   
     2) Right-Right Heavy Situation
-     Node-1
-     /    \
-   T1    Node-2
-          /   \   
-         T2   Node-3   
-              /    \
-            T3      T4
+    
+   parent-node                                  parent-node
+        |                                            |  
+     Node-1                                        Node-2
+     /    \                                       /      \ 
+   T1    Node-2                               Node1     Node-3
+          /   \         (after rotation)     /    \      /   \
+         T2   Node-3         ==>>          T1      T2  T3     T4
+              /    \                                       
+            T3      T4                                    
+            
     3) Left-Right Heavy Situation
-        Node
-       /    \
-     Node    T1
-    /    \
-   T2    Node
-        /    \
-      T4      T3 
+     
+     parent-node                                     parent-node                                       parent-node 
+         |                                                |                                                 |
+       Node-1                                           Node-1                                            Node-3
+       /    \             (1st rotation)                /    \             (2nd rotation)                /      \ 
+   Node-2    T1   (right-right heavy situation)    Node-3     T1   (left-left heavy situation)       Node-2    Node-1
+    /    \                 (at Node2)               /    \                  (at Node1)               /    \    /    \
+   T2   Node-3               ==>>               Node-2    T3                   ==>>                T2     T4  T3     T1
+        /    \                                  /    \                                           
+      T4      T3                              T2     T4                                        
+      
     4) Right-Left Heavy Situation
       Node
      /    \
@@ -101,26 +109,54 @@ class AVLTree:
     if self.balance_factor(node) > 1:
       #CASE-1 => left-left heavy situation
       if node.leftNode and self.balance_factor(node.leftNode) > 0:
-        #declare initial nodes to be rotated
-        parentNode = node.parent
-        node1 = node
-        node2 = node.leftNode
-        t2 = node2.rightNode
-        #rotations
-        node1.parent, node1.leftNode = node2, t2
-        t2.parent = node1
-        node2.parent, node2.rightNode = parentNode, node1
+        self.left_left_heavy(node)
       #CASE-2 => left-right heavy situation  
       elif node.leftNode and self.balance_factor(node.leftNode) < 0:
-        pass
+        self.right_right_heavy(node.leftNode)
+        self.left_left_heavy(node)
     elif balance_factor(node) < -1:
       #CASE-3 => right-right heavy situation
       if node.rightNode and self.balance_factor(node.rightNode) < 0:
-        pass
+        self.right_right_heavy(node)
       #CASE-4 => right-left heavy situation
       elif node.rightNode and self.balance_factor(node.rightNode) > 0:
-        pass
-      
+        self.left_left_heavy(node.rightNode)
+        self.right_right_heavy(node)
+    return node
+    
+  def left_left_heavy(self, node):
+   #declare initial nodes to be rotated
+    parentNode = node.parent
+    node1 = node
+    node2 = node.leftNode
+    if node.leftNode.rightNode is not None:
+      t2 = node.leftNode.rightNode
+    else:
+      t2 = None
+    #making rotations
+    node1.parent, node1.leftNode = node2, t2
+    node2.parent, node2.rightNode = parentNode, node1
+    if t2 is not None:
+      t2.parent = node1
+    return node1  
+
+  def right_right_heavy(self, node):
+      #declare initial nodes to be rotated
+    parentNode = node.parent
+    node1 = node
+    node2 = node.rightNode
+    if node.rightNode.leftNode is not None:
+      t2 = node.rightNode.leftNode
+    else:
+      t2 = None
+    
+    #making rotations
+    node1.parent, node1.rightNode = node2, t2
+    node2.parent, node2.leftNode = parentNode, node1
+    if t2 is not None:
+      t2.parent = node1
+    return node1
+    
   def handle_violation(self, node):
     while node != None
       self.calculate_height(node)
