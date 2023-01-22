@@ -43,15 +43,16 @@ class AVLTree:
   def calculate_height(self, node):
     #deal with four possibilities
     if node.leftNode and node.rightNode:
-      return node.height = max(node.leftNode.height, node.rightNode.height) + 1
+      node.height = max(node.leftNode.height, node.rightNode.height) + 1
     elif node.leftNode and not node.rightNode:
-      return node.height = max(node.leftNode.height, -1) + 1
+      node.height = max(node.leftNode.height, -1) + 1
     elif not node.leftNode and node.rightNode:
-      return node.height = max(-1, node.rightNode.height) + 1
+      node.height = max(-1, node.rightNode.height) + 1
     elif not node.leftNode and not node.rightNode:
-      return node.height = max(-1, -1) + 1
-    elif node = None:
-      return -1
+      node.height = max(-1, -1) + 1
+    elif node is None:
+      node.height = -1
+    return node
 
   def balance_factor(self, node):
     balance = node.leftNode.height - node.rightNode.height
@@ -97,13 +98,17 @@ class AVLTree:
       T4      T3                              T2     T4                                        
       
     4) Right-Left Heavy Situation
-      Node
-     /    \
-   T1      Node
-          /   \   
-       Node    T2   
-      /    \
-    T3      T4
+
+   parent-node                                        parent-node                                       parent-node
+       |                                                  |                                                  |
+     Node-1                                             Node-1                                             Node-3
+     /    \                (1st rotation)               /    \               (2nd rotation)               /      \     
+   T1    Node-2     (left-left heavy situation)       T1    Node-3    (right-right heavy situation)  Node-1      Node-2
+          /   \              (at Node2)                      /    \           (at Node1)              /   \       /   \
+      Node-3   T2               ==>>                       T3    Node-2          ==>>               T1     T3    T4    T2
+      /    \                                                     /    \                                             
+    T3      T4                                                  T4     T2                                         
+    
     """
     #there can be four situations
     if self.balance_factor(node) > 1:
@@ -158,10 +163,10 @@ class AVLTree:
     return node1
     
   def handle_violation(self, node):
-    while node != None
+    while node is not None:
       self.calculate_height(node)
-        if self.balance_factor(node) < -1 or self.balance_factor(node) > 1:
-          self.make_rotations(node)
+      if self.balance_factor(node) < -1 or self.balance_factor(node) > 1:
+        self.make_rotations(node)
       node = node.parent
 
   def remove(self, data):
