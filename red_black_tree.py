@@ -18,29 +18,34 @@ class Node:
     self.left_node = None
     self.right_node = None
 
+
 class RedBlackTree:
   def __init__(self):
     self.root = None
     
   def insert(self, data):
     if not self.root:
-      root = Node(data)
+      self.root = Node(data)
+      print("Inserted ROOT", self.root.data)
+      self.settle_violation(self.root)
     else:
       self.insert_node(self.root, data)
 
   def insert_node(self, node, data):
     if data < node.data:
       if node.left_node:
-        insert_node(node.left_node, data)
+        self.insert_node(node.left_node, data)
       else:
-        left_node = Node(data, parent=node)
-        self.settle_violation(left_node)
+        node.left_node = Node(data, parent=node)
+        print("Inserted ", node.left_node.data)
+        self.settle_violation(node.left_node)
     if data > node.data:
       if node.right_node:
-        insert_node(node.right_node, data)
+        self.insert_node(node.right_node, data)
       else:
-        right_node = Node(data, parent=node)
-        self.settle_violation(right_node)
+        node.right_node = Node(data, parent=node)
+        print("Inserted ", node.right_node.data)
+        self.settle_violation(node.right_node)
       
   def traverse(self):
     if self.root:
@@ -48,10 +53,10 @@ class RedBlackTree:
   
   def inorder_traverse(self, node):
     if node.left_node:
-      inorder_traverse(node.left_node)
+      self.inorder_traverse(node.left_node)
     print(node.data)
     if node.right_node:
-      inorder_traverse(node.right_node)
+      self.inorder_traverse(node.right_node)
 
   def rotate_right(self, node):
     """
@@ -213,19 +218,18 @@ class RedBlackTree:
                
     '''
     # HANDLE ALL CASES
-    
     # loop will break once the node is root node + node is black + and node parent is None
     while node != self.root and self.is_red(node) and self.is_red(node.parent):
       # get parent + grand parent + uncle
       parent_node = node.parent
       grand_parent_node = parent_node.parent
-      
       if parent_node == grand_parent_node.left_node:
         uncle = grand_parent_node.right_node
         # uncle is RED CASE-4
         if uncle and self.is_red(uncle):
+          print("Settling violation for", node.data)
           grand_parent_node.colour = Colour.RED
-          parent_node.node.colour = Colour.BLACK
+          parent_node.colour = Colour.BLACK
           uncle.colour = Colour.BLACK
           node = grand_parent_node
         # uncle is BLACK CASE-5
@@ -233,6 +237,7 @@ class RedBlackTree:
           # L-R heavy situation CASE-5(b)
           if node == parent_node.right_node:
             # make rotations
+            print("Settling violation for", node.data)
             self.rotate_left(parent_node)
             self.rotate_right(grand_parent_node)
             # change colour
@@ -243,6 +248,7 @@ class RedBlackTree:
           # L-L heavy situation CASE-5(a)
           elif node == parent_node.left_node:
             # make rotations
+            print("Settling violation for", node.data)
             self.rotate_right(grand_parent_node)
             # change colour
             grand_parent_node.colour = Colour.RED
@@ -254,8 +260,9 @@ class RedBlackTree:
         uncle = grand_parent_node.left_node
         # uncle is RED CASE-4
         if uncle and self.is_red(uncle):
+          print("Settling violation for", node.data)
           grand_parent_node.colour = Colour.RED
-          parent_node.node.colour = Colour.BLACK
+          parent_node.colour = Colour.BLACK
           uncle.colour = Colour.BLACK
           node = grand_parent_node
         # uncle is BLACK CASE-5
@@ -263,6 +270,7 @@ class RedBlackTree:
           # R-L heavy situation CASE-5(d)
           if node == parent_node.left_node:
             # make rotations
+            print("Settling violation for", node.data)
             self.rotate_right(parent_node)
             self.rotate_left(grand_parent_node)
             # change colour
@@ -273,6 +281,7 @@ class RedBlackTree:
           # R-R heavy situation CASE-5(c)
           elif node == parent_node.right_node:
             # make rotations
+            print("Settling violation for", node.data)
             self.rotate_left(grand_parent_node)
             # change colour
             grand_parent_node.colour = Colour.RED
@@ -282,7 +291,22 @@ class RedBlackTree:
     
     # node inserted is root node CASE-1      
     if self.is_red(self.root):
+      print("Settling violation for ROOT", self.root.data)
       self.root.colour = Colour.BLACK
           
       
-      
+
+
+
+
+tree = RedBlackTree()
+tree.insert(32)
+tree.insert(10)
+tree.insert(55)
+tree.insert(1)
+tree.insert(19)
+tree.insert(79)
+tree.insert(16)
+tree.insert(23)
+tree.insert(12)
+tree.traverse()
