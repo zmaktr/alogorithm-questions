@@ -13,5 +13,5 @@
 #from binary_search_tree_questions import *
 #from AVL_tree import *
 #from red_black_tree import *
-from binary_heap import *
-
+#from binary_heap import *
+from heapq_module import *
