@@ -77,6 +77,7 @@ class Heap:
         self.fix_down(right_child_index)
   
   def heap_sort(self):
+    # this method will yield the (1) max_item (2) pop/remove it (3) heapify
     for _ in range(self.heap_size):
       max_item = self.pool()
       print(max_item)
