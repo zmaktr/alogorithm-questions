@@ -14,4 +14,6 @@
 #from AVL_tree import *
 #from red_black_tree import *
 #from binary_heap import *
-from heapq_module import *
+#from heapq_module import *
+#from hash_table import *
+from breadth_first_search import *
