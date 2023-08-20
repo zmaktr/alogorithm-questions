@@ -16,4 +16,5 @@
 #from binary_heap import *
 #from heapq_module import *
 #from hash_table import *
-from breadth_first_search import *
+#from breadth_first_search import *
+from depth_first_search import *

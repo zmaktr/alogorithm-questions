@@ -21,9 +21,9 @@ def breadth_first_search(start_node):
   queue = [start_node]
   
   while queue:
-    queue = [node for node in queue[-1].adjacent_list] + queue
+    queue = [node for node in queue[-1].adjacent_list if not node.visited] + queue
     if queue[-1].visited == False:
-      print(queue[-1].name)
+     print(queue[-1].name)
     queue[-1].visited = True
     queue.pop(-1)
     
@@ -38,10 +38,16 @@ def breadth_first_search(start_node):
 #v    v
 #E--->D
 
+A = Node('A')
+B = Node('B')
 C = Node('C')
 D = Node('D')
-B = Node('B', adjacent_list=[C,D])
-E = Node('E', adjacent_list=[D])
-A = Node('A', adjacent_list=[B,E])
+E = Node('E')
+
+A.adjacent_list = [B,E]
+B.adjacent_list = [A,D,C]
+C.adjacent_list = [B]
+D.adjacent_list = [E,B]
+E.adjacent_list = [A,D]
 
 breadth_first_search(A)
